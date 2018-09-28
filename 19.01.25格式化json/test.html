@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+			<pre class="jsonview">
+			</pre>
+		</div>
+	</body>
+	<script>
+		var json = {
+			test1: "测试",
+			test2: "测试",
+			test3: "测试",
+			test4: "测试",
+			test5: "测试",
+			test6: [{
+				array1 : [
+					"aaa",
+					"bbb",
+					"ccc"
+				]
+			}],
+			test7: "测试"
+		};
+		document.querySelector(".jsonview").innerHTML = JSON.stringify(json, null, 4);
+	</script>
+</html>
