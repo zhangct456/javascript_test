@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.outter{
+			background-color: aliceblue;
+			height: 500px;
+			width: 500px;
+			position: relative;
+		}
+		.inner{
+		      position: absolute;
+		      left: 50%;
+		      top: 50%;
+		      -webkit-transform: translate(-50%,-50%);
+		        -ms-transform: translate(-50%,-50%);
+		            transform: translate(-50%,-50%);
+
+		}
+	</style>
+	<body>
+		<div class="outter">
+			<div class="inner">
+				center
+			</div>
+		</div>
+	</body>
+</html>

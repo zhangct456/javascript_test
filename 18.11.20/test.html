@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="test3d">
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</body>
+	<script>
+		window.onload = function() {
+			var testDiv = document.querySelector(".test3d");
+			var testUl = document.querySelector(".test3d ul")
+			var X = 0;
+			var Y = 0;
+			var tempX = 0;
+			var tempY = 0;
+			var mouseMove = function(event) {
+				var e = event || window.event;
+				var newX = e.clientX;
+				var newY = e.clientY;
+				testUl.style.transform = "rotateX(" + (tempX + (Y-newY)) + "deg) rotateY(" + (tempY + (newX-X)) + "deg)";
+			}
+			var mouseDown = function(event) {
+				var e = event || window.event;
+				X = e.clientX;
+				Y = e.clientY;
+				var reg = new RegExp(/rotateX\((-?\d*.?\d*deg)\)\s?rotateY\((-?\d*.?\d*deg)\)/)
+				var transformStyle = testUl.style.transform;
+				var array = reg.test(transformStyle);
+				tempX = Number(RegExp.$1.replace('deg', ''));
+				tempY = Number(RegExp.$2.replace('deg', ''));
+				testDiv.addEventListener("mousemove", mouseMove);
+			}
+			var mouseUp = function() {
+				testDiv.removeEventListener("mousemove", mouseMove);
+			}
+			testDiv.addEventListener("mousedown", mouseDown);
+			testDiv.addEventListener("mouseup", mouseUp);
+		}
+	</script>
+	<style>
+		html,body{
+			height: 100%;
+		}
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.test3d{
+			backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			transform-style: preserve-3d;
+			-moz-transform-style: preserve-3d;
+			perspective-origin: 50% 0;
+			-moz-perspective-origin: 50% 0;
+			-ms-perspective-origin: 50% 0;
+			-webkit-perspective-origin: 50% 0;
+			perspective: 1000px;
+			-moz-perspective: 1000px;
+			-ms-perspective: 1000px;
+			-webkit-perspective: 1000px;
+			padding-top: 100px;
+			height: 100%;
+		}
+		.test3d ul{
+			list-style: none;
+			width: 100px;
+			height: 100px;
+			margin:  0 auto;
+			position: relative;
+			backface-visibility: visible;
+			backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			transform-style: preserve-3d;
+			-moz-transform-style: preserve-3d;
+			transform-origin: 50px 50px -50px;
+			/*animation: fangun 5s linear infinite;*/
+		}
+		.test3d ul li{
+			width: 100px;
+			height: 100px;
+			position: absolute;
+			left: 0;
+			top: 0;
+			font-size: 20px;
+			color: white;
+			text-align: center;
+			line-height: 100px;
+		}
+		.test3d ul li:nth-child(1){
+			background-color: gainsboro;
+		}
+		.test3d ul li:nth-child(2){
+			background-color: blue;
+			transform: rotateY(180deg) translateZ(100px);
+		}
+		.test3d ul li:nth-child(3){
+			background-color: yellow;
+			transform-origin: left;
+			transform: rotateY(-90deg) translateX(-100px);
+		}
+		.test3d ul li:nth-child(4){
+			background-color: red;
+			transform-origin: right;
+			transform: rotateY(90deg) translateX(100px);
+		}
+		.test3d ul li:nth-child(5){
+			background-color: green;
+			transform-origin: top;
+			transform: rotateX(90deg) translateY(-100px);
+		}
+		.test3d ul li:nth-child(6){
+			background-color: black;
+			transform-origin: bottom;
+			transform: rotateX(-90deg) translateY(100px);
+		}
+		
+		@keyframes fangun{
+			0%{
+				transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+			}
+			/*33%{
+				transform: rotateX(180deg) rotateY(0deg) rotateZ(0deg);
+			}
+			67%{
+				transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg);
+			}*/
+			100%{
+				transform: rotateX(360deg) rotateY(360deg) rotateZ(0deg);
+			}
+		}
+	</style>
+</html>

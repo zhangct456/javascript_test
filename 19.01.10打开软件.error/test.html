@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+//		 function Exec(filePath) {            
+//            try { 
+//                var shell = new ActiveXObject("WScript.Shell");
+//                var fso = new ActiveXObject("Scripting.FileSystemObject");
+//                filePath = filePath.split("HaiKou\\")[1].toString().split("\\"); //参数
+//                filePath = $("#hfFilePath").val() + filePath[0] + "//" + filePath[1] + "//" + filePath[2];
+//                var exePath = shell.RegRead("HKEY_CLASSES_ROOT\\MBSFiles\\Shell\\Open\\Command\\");         
+//                exePath = exePath.split("%")[0].split("\"")[0];
+//                if (fso.FileExists(exePath)) {                       
+//                    window.location.href = "Aglodongbe://" + filePath;  //Aglodongbe为注册表中将要打开的exe的项 ；直接在浏览器中输入也能打开exe程序
+//                }
+//                else {
+//                    alert("未能检测到本地已安装辅助工具");
+//                }
+//             } catch (e) {
+//                 alert("未能检测到本地已安装该软件");
+//             }                     
+//        }
+		 function Exec(filePath) {       //filePath:参数，如果不需要参数则不需要，根据自己的需求来     
+            if (window.ActiveXObject) {
+                try {                   
+                    var shell = new ActiveXObject("WScript.Shell");
+                    var fso = new ActiveXObject("Scripting.FileSystemObject");
+                    var exePath = shell.RegRead("HKEY_CLASSES_ROOT\\MBSFiles\\Shell\\Open\\Command\\");  //根据注册表信息找到本地应用程序安装路径
+                    exePath = exePath.split("%")[0].substring(0, exePath.length - 1);                   
+                    filePath = $("#hfFilePath").val() + filePath.split("HaiKou\\")[1];
+                    var para = exePath + " " + filePath; //如果没有参数则去掉filePath
+                    if (fso.FileExists(exePath)) {   //检测是否安装了                    
+                        shell.exec(para); //打开
+                    }
+                    else {
+                        alert("未能检测到本地已安装该软件");
+                    }
+                } catch (e) {
+                    alert(e.message);
+                }               
+            }
+            else {
+                alert("请使用IE并正确配置浏览器！");
+            }
+        }
+		 Exec("C:\Program Files (x86)\CSII_HTML ClientEBank\ClientEBankLoading.exe");
+	</script>
+</html>

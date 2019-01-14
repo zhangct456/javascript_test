@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		var json = {
+			a: 111,
+			b: 222,
+			c: 333
+		}
+		for (var key in json) {
+			console.log(`${key} : ${JSON.stringify(json)}`);
+			delete json[key];
+		}
+	</script>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var str = "<PEAjaxError>zzzzzzzzzzzzzzzz<\/PEAjaxError>";
+			var re = '';
+			if(/<PEAjaxError>(.*)<\/PEAjaxError>/.test(str)){
+				re = RegExp.$1;
+			}
+			console.log(re)
+		</script>
+	</body>
+</html>

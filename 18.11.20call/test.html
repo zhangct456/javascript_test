@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function obj() {
+				this.value = "obj";
+			}
+			var value = "window";
+			function Fun(a, b, c){
+				console.log(this.value);
+				console.log(a);
+				console.log(b);
+				console.log(c);
+			}
+			window.Fun();
+//			Fun.call(new obj());
+			Fun.call(new obj(),1,2,3);
+			Fun.apply(new obj(),[1,2,3]);
+		</script>
+	</body>
+</html>

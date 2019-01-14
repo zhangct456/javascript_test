@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="box">
+			<p class="test">两端对齐</p>
+			<p class="test1">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+			<p class="test2">超出部分省略号超出部分省略号超出部分省略号超出部分省略号超出部分省略号超出部分省略号</p>
+		</div>
+	</body>
+	<style>
+		.box{width: 500px;border: 1px solid #000;}
+		.test{text-align: justify;}
+		.test:after{width: 100%;display: inline-block;content: '';}
+		.test1{text-align: justify;word-wrap: break-word;}
+		.test1:after{width: 100%;display: inline-block;content: '';}
+		.test2{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+	</style>
+</html>
