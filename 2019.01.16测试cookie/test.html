@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		//用文件路径打开无效
+		//file:///H:/MyGithub/zct.learn.test/2019.01.16%E6%B5%8B%E8%AF%95cookie/test.html
+		var cookieStr = document.cookie;
+		if(!document.cookie){
+			console.log("first open");
+			document.cookie = "cookie";
+		}else{
+			console.log(" cookie:" + cookieStr +", no first open");
+			document.cookie = "cookie";
+		}
+		
+		//获取url中的参数
+		var str = window.location.href;
+		var num = str.indexOf('?');
+		var paramStr = str.substr(num+1);
+		if(/noFirstStartFlag/.test(paramStr)){
+			console.log(num);
+			console.log(paramStr);
+		}
+	</script>
+</html>
