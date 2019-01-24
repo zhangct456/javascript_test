@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		var url = "http://127.0.0.1:9999";
+		
+		var socket = new WebSocket(url);
+
+		// 建立 web socket 连接成功触发事件
+		socket.onopen = function() {
+			// 使用 send() 方法发送数据
+			socket.send("发送数据");
+			alert("数据发送中...");
+		};
+		
+		// 通信发生错误时触发事件
+		socket.onerror = function(evt) {
+			var received_msg = evt.data;
+			alert("通信发生错误...");
+		};
+		
+		// 接收服务端数据时触发事件
+		socket.onmessage = function(evt) {
+			var received_msg = evt.data;
+			alert("数据已接收...");
+		};
+		
+		// 断开 web socket 连接成功触发事件
+		socket.onclose = function() {
+			alert("连接已关闭...");
+		};
+	</script>
+</html>
