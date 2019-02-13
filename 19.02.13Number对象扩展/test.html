@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		解决浮点数计算误差问题
+	</body>
+	<script>
+		//加法   
+		Number.prototype.add = function(arg) {
+			var r1, r2, m;
+			try {
+				r1 = this.toString().split(".")[1].length
+			} catch(e) {
+				r1 = 0
+			}
+			try {
+				r2 = arg.toString().split(".")[1].length
+			} catch(e) {
+				r2 = 0
+			}
+			m = Math.pow(10, Math.max(r1, r2))
+			return(this * m + arg * m) / m
+		}
+		//减法   
+		Number.prototype.sub = function(arg) {
+			return this.add(-arg);
+		}
+		//四舍五入
+		Number.prototype.toFixed = function(s) {
+			var s = s || 0;
+			var numStr = this.toString().split('.');
+			if(numStr[1]) {
+				if(numStr[1][s] && numStr[1][s] >= 5) {
+					if(s == 0){
+						var t = parseInt(numStr[0]);
+						var re = t + 1;
+						return Number(re);
+					}else{
+						var t = numStr[1].substring(0, s - 1);
+						var lastNum = parseInt(numStr[1][s - 1]) + 1;
+						var re = numStr[0] + '.' + t + lastNum;
+						return Number(re);
+					}
+				} else {
+					var re = numStr[0] + '.' + numStr[1].substring(0, s);
+					return Number(re);
+				}
+			} else {
+				return this;
+			}
+		};
+		//乘法
+		Number.prototype.mul = function(arg) {
+			var m = 0,
+				s1 = this.toString(),
+				s2 = arg.toString();
+			try {
+				m += s1.split(".")[1].length
+			} catch(e) {}
+			try {
+				m += s2.split(".")[1].length
+			} catch(e) {}
+			return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
+		};
+		//除法
+		Number.prototype.dev = function(arg) {
+			var t1 = 0,
+				t2 = 0,
+				r1, r2;
+			try {
+				t1 = this.toString().split(".")[1].length
+			} catch(e) {}
+			try {
+				t2 = arg.toString().split(".")[1].length
+			} catch(e) {}
+			r1 = Number(this.toString().replace(".", ""));
+			r2 = Number(arg.toString().replace(".", ""));
+			return(r1 / r2) * Math.pow(10, t2 - t1);
+		};
+		
+		var aa = 111.44;
+		var bb = 222.66;
+		console.log("四舍五入:");
+		console.log(aa.toFixed(1));
+		console.log(bb.toFixed(1));
+		console.log(aa.toFixed());
+		console.log(bb.toFixed());
+		console.log("加法:");
+		console.log(aa + "+" + bb + "=" + aa.add(bb));
+		console.log("减法:");
+		console.log(aa + "-" + bb + "=" + aa.sub(bb));
+		console.log("乘法:");
+		console.log(aa + "*" + bb + "=" + aa.mul(bb));
+		console.log("除法:");
+		console.log(aa + "/" + bb + "=" + aa.dev(bb));
+	</script>
+
+</html>
