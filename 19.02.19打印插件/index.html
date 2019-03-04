@@ -1,0 +1,61 @@
+<!Doctype html>
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	</head>
+
+	<body>
+		<div id="printCont">
+			<h2>this is test html</h2>
+			<table style="border:1px solid #f2f2f2;width:200px;">
+
+				<thead>
+					<tr>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+					</tr>
+					<tr>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+					</tr>
+					<tr>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+					</tr>
+					<tr>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<button id="printBtn">打印</button>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.PrintArea.js"></script>
+		<script type="text/javascript">
+			function doprint() {
+				var a = $("#printCont");
+				a.printArea();
+			};
+			document.getElementById("printBtn").onclick = doprint;
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body id="app">
+	</body>
+	<script>
+		var url = "zz6.jpg"
+		var aaa = new Promise((resolve, reject) => {
+            let img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = url;
+            document.getElementById("app").appendChild(img);
+       });
+       aaa.then(function(img){
+       	console.log("加载成功" + img);
+       },function(err){
+       	console.log("加载出错" + err);
+       })
+	</script>
+</html>

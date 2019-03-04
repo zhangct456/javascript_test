@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+	</body>
+	<script>
+		function EventEmitter() {
+			this.clientList = {};
+		}
+		// params: key 和 监听函数
+		EventEmitter.prototype.on = function(name, cb) {
+			if(!this.clientList[name]) {
+				this.clientList[name] = [];
+			}
+			this.clientList[name].push(cb);
+		}
+		// params: key 和 传给监听函数的参数
+		EventEmitter.prototype.emit = function() {
+			let name = [].shift.call(arguments);
+			let cbs = this.clientList[name];
+			if(!cbs || cbs.length === 0) return false;
+			cbs.forEach((cbs) => {
+				cbs(...arguments);
+			});
+		}
+		EventEmitter.prototype.remove = function(name, cb) {
+			let cbs = this.clientList[name];
+			if(!cbs) return false;
+			if(!cb) {
+				cbs && (cbs.length = 0);
+			} else {
+				this.clientList[name] = cbs.filter((item) => {
+					return item != cb;
+				});
+			}
+		}
+		// 与on方法类似，但是监听函数cb是一次性的，emit触发使用后自动移除
+		EventEmitter.prototype.once = function(name, cb) {
+			let _this = this;
+
+			function callOnce() {
+				cb(...arguments); // cb.apply(_this, arguments);
+				_this.remove(name, callOnce);
+			}
+			this.on(name, callOnce);
+		}
+		
+		var emitter = new EventEmitter();
+		
+		emitter.on("test", function(a,b,c){
+			console.log(a, b, c);
+		})
+		
+		emitter.emit("test", "a", "b", "c");
+		
+	</script>
+
+</html>

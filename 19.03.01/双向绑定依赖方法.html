@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+	</body>
+	<script>
+		var json = {
+			data: 'hello',
+			text: 'world'
+		};
+		(function() {
+			var bValue;
+			Object.defineProperty(json, 'data', {
+				get: function() {
+					console.log(bValue);
+					return bValue;
+				},
+				set: function(newValue) {
+					console.log(newValue);
+					bValue = newValue;
+				},
+				enumerable: true,
+				configurable: true
+			});
+			console.log(window)
+			json.data = "fdsfdsfsdfd0";
+			json.data = "fdsfdsfsdfd1";
+			json.data = "fdsfdsfsdfd2";
+			json.data = "fdsfdsfsdfd3";
+			json.data = "fdsfdsfsdfd4";
+		})();
+	</script>
+
+</html>

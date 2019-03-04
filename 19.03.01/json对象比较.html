@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		var data1 = {
+			a : 1,
+			b : 2
+		};
+		var data2 = {
+			a : 1,
+			b : 4
+		}
+		var data3 = {
+			b : 2,
+			a : 1,
+			c : function(){
+				console.log(this.a);
+			}
+		}
+		str1 = JSON.stringify(data1);
+		str2 = JSON.stringify(data2);
+		str3 = JSON.stringify(data3);
+		console.log(str1 == str2);
+		console.log(str1 == str3);
+	</script>
+</html>

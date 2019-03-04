@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			//比较2个对象是否相同
+			function isObjEqual(o1, o2) {
+				var props1 = Object.getOwnPropertyNames(o1);
+				var props2 = Object.getOwnPropertyNames(o2);
+				if(props1.length != props2.length) {
+					return false;
+				}
+				for(var i = 0, max = props1.length; i < max; i++) {
+					var propName = props1[i];
+					if(o1[propName] !== o2[propName]) {
+						return false;
+					}
+				}
+				return true;
+			}
+			var obj1 = {
+				id: 1,
+				name: "张三"
+			}
+			var obj2 = {
+				id: 2,
+				name: "李四"
+			}
+			var obj3 = {
+				id: 1,
+				name: "张三",
+				age: 25
+			}
+			var obj4 = {
+				id: 1,
+				name: "张三"
+			}
+			console.log(isObjEqual(obj1, obj2)); //false
+			console.log(isObjEqual(obj1, obj3)); //false
+			console.log(isObjEqual(obj1, obj4)); //true
+		</script>
+	</body>
+
+</html>
